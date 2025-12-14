@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이번 방학, 주인공은 나야 나! 주간 계획표</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;700&display=swap');
+
+        :root {
+            --primary-color: #4a90e2; /* 선생님 추천 파란색 */
+            --accent-color: #ff6b6b; /* 경고/강조 색 */
+            --bg-color: #f0f4f8;
+            --table-header: #2c3e50;
+            --text-color: #333;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .planner-container {
+            background: white;
+            width: 100%;
+            max-width: 1000px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+            border: 2px solid #ddd;
+        }
+
+        /* 헤더 디자인 */
+        .header {
+            background: var(--primary-color);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-family: 'Jua', sans-serif; /* 귀여운 제목 폰트 */
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        .header p {
+            margin-top: 10px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* 목표 섹션 */
+        .goals-section {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            background: #eef5ff;
+            border-bottom: 2px dashed #ccddee;
+        }
+
+        .goal-card {
+            background: white;
+            padding: 10px 20px;
+            border-radius: 15px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+            text-align: center;
+            font-weight: bold;
+            color: var(--text-color);
+            flex: 1;
+            margin: 0 10px;
+        }
+
+        .goal-card span {
+            display: block;
+            font-size: 0.85rem;
+            color: #777;
+            margin-bottom: 5px;
+        }
+
+        /* 시간표 테이블 */
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .schedule-table th, .schedule-table td {
+            border: 1px solid #eee;
+            padding: 15px;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        .schedule-table th {
+            background-color: var(--table-header);
+            color: white;
+            font-weight: normal;
+            letter-spacing: 1px;
+            width: 15%; /* 시간 열 너비 */
+        }
+
+        /* 요일 헤더 */
+        .schedule-table thead th:first-child { width: 10%; } /* 시간 */
+        .schedule-table thead th:nth-child(2) { width: 50%; background-color: #34495e; } /* 평일 */
+        .schedule-table thead th:nth-child(3) { width: 20%; background-color: #e67e22; } /* 토요일 */
+        .schedule-table thead th:nth-child(4) { width: 20%; background-color: #e74c3c; } /* 일요일 */
+
+        /* 셀 디자인 */
+        .time-cell {
+            font-weight: bold;
+            color: var(--primary-color);
+            background: #fafafa;
+        }
+
+        .highlight-math {
+            background-color: #fff0f0;
+            border-left: 5px solid var(--accent-color);
+            color: #c0392b;
+            font-weight: bold;
+        }
+
+        .highlight-fun {
+            background-color: #fff8e1;
+            color: #d35400;
+        }
+
+        .highlight-routine {
+            background-color: #f0f8ff;
+            color: #2980b9;
+        }
+
+        .lotte-world {
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe0e0 100%);
+            color: #d63031;
+            font-weight: bold;
+            font-family: 'Jua', sans-serif;
+            font-size: 1.2rem;
+        }
+
+        /* 조언 섹션 */
+        .footer-advice {
+            background: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .footer-advice strong {
+            color: #ffeb3b;
+            font-size: 1.3rem;
+            display: block;
+            margin-top: 10px;
+            font-family: 'Jua', sans-serif;
+        }
+
+        /* 반응형 */
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.8rem; }
+            .goals-section { flex-direction: column; gap: 10px; }
+            .goal-card { margin: 0; }
+            .schedule-table th, .schedule-table td { padding: 10px 5px; font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="planner-container">
+    <div class="header">
+        <h1>❄️ 겨울방학 완전 정복 계획표 ❄️</h1>
+        <p>선생님과 함께하는 작심삼일 타파 프로젝트</p>
+    </div>
+
+    <div class="goals-section">
+        <div class="goal-card">
+            <span>🎯 최우선 학업 목표</span>
+            수학 문제집 끝내기!
+        </div>
+        <div class="goal-card">
+            <span>🎢 꼭 하고 싶은 것</span>
+            롯데월드 가기 (조건부)
+        </div>
+        <div class="goal-card">
+            <span>✨ 매일 습관</span>
+            영단어 30개 암기
+        </div>
+    </div>
+
+    <table class="schedule-table">
+        <thead>
+        <tr>
+            <th>시간</th>
+            <th>월 ~ 금 (평일: 갓생살기)</th>
+            <th>토 (보상 DAY)</th>
+            <th>일 (충전 DAY)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="time-cell">09:00<br>~ 12:00</td>
+            <td class="highlight-routine">
+                🌅 <strong>오전 루틴 (영어 집중)</strong><br>
+                💻 인강 2강 듣기<br>
+                🔥 영단어 30개 암기 (필수)
+            </td>
+            <td>🛌 <strong>꿀잠 타임</strong><br>(10시 기상 추천)<br>주간 복습</td>
+            <td>⛪ <strong>자유 / 종교활동</strong><br>완벽한 휴식</td>
+        </tr>
+        <tr>
+            <td class="time-cell">12:00<br>~ 13:00</td>
+            <td>🍚 급식만큼 맛있는 점심</td>
+            <td>🍚 점심 식사</td>
+            <td>🍚 점심 식사</td>
+        </tr>
+        <tr>
+            <td class="time-cell">13:00<br>~ 18:00</td>
+            <td class="highlight-routine">
+                ☀️ <strong>오후 루틴 (학원)</strong><br>
+                🚌 학원 수업 & 이동<br>
+                (이동 중 단어장 보기!)
+            </td>
+            <td rowspan="3" class="lotte-world">
+                🎢 롯데월드 가는 날!<br>
+                <span style="font-size:0.9rem; font-weight:normal; color:#555;">(평일 계획 80% 달성 시)</span><br>
+                <br>
+                📸 인생샷 찍기
+            </td>
+            <td>🧹 <strong>방 정리 & 준비</strong><br>책상 정리, 가방 싸기</td>
+        </tr>
+        <tr>
+            <td class="time-cell">18:00<br>~ 19:00</td>
+            <td>🍚 저녁 식사 & 휴식</td>
+            <td>🍚 저녁 식사</td>
+        </tr>
+        <tr>
+            <td class="time-cell">19:00<br>~ 20:30</td>
+            <td class="highlight-math">
+                🔥 <strong>[골든타임] 수학 정복</strong> 🔥<br>
+                문제집 5장 풀기<br>
+                (이거 안 하면 노는 시간 없다!)
+            </td>
+            <td>📅 <strong>다음주 계획</strong><br>학원 숙제 체크하기</td>
+        </tr>
+        <tr>
+            <td class="time-cell">20:30<br>~ 23:00</td>
+            <td class="highlight-fun">
+                🌙 <strong>[보상] 취미 활동</strong><br>
+                🎮 게임 / 유튜브 / 웹툰<br>
+                (죄책감 없이 놀자!)
+            </td>
+            <td class="highlight-fun">🛁 <strong>휴식 및 귀가</strong><br>따뜻한 물로 씻기</td>
+            <td class="highlight-fun">📖 <strong>독서 / 명상</strong><br>일찍 잠들기</td>
+        </tr>
+        <tr>
+            <td class="time-cell">23:00 ~</td>
+            <td>🛌 꿈나라 여행</td>
+            <td>🛌 꿈나라 여행</td>
+            <td>🛌 꿈나라 여행</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="footer-advice">
+        TEACHER'S ADVICE
+        <strong>"어제와 똑같이 살면서 다른 미래를 기대하는 건 욕심이다.<br>
+            롯데월드 츄러스는 수학 문제집 다 풀고 먹어야 더 맛있는 법! 딱 3일만 버텨보자!"</strong>
+    </div>
+</div>
+
+</body>
+</html>
