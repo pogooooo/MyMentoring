@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025 겨울방학 생활계획표 - 최수환</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --border-color: #000;
+            --bg-gray: #f3f4f6;
+        }
+
+        body {
+            font-family: 'Gowun Dodum', sans-serif;
+            background-color: #555;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* A4 규격 설정 */
+        .sheet {
+            width: 210mm;
+            min-height: 297mm; /* A4 Height */
+            background-color: white;
+            padding: 25mm 20mm; /* 일반적인 문서 여백 */
+            position: relative;
+            box-shadow: 0 0 15px rgba(0,0,0,0.3);
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 폰트 유틸리티 */
+        .font-serif { font-family: 'Gowun Batang', serif; }
+        .font-sans { font-family: 'Gowun Dodum', sans-serif; }
+
+        /* 학습지 스타일 테이블 */
+        .hwp-table {
+            width: 100%;
+            border-collapse: collapse;
+            border-top: 2px solid black;
+            border-bottom: 2px solid black;
+        }
+        .hwp-table th {
+            background-color: var(--bg-gray);
+            border: 1px solid black;
+            padding: 8px;
+            font-weight: bold;
+            font-family: 'Gowun Batang', serif;
+            font-size: 14px;
+        }
+        .hwp-table td {
+            border: 1px solid black;
+            padding: 8px 12px;
+            font-size: 14px;
+            vertical-align: middle;
+        }
+
+        /* 섹션 제목 스타일 */
+        .section-title {
+            display: flex;
+            align-items: center;
+            font-family: 'Gowun Batang', serif;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid black;
+            padding-bottom: 5px;
+        }
+        .section-title::before {
+            content: '■';
+            font-size: 12px;
+            margin-right: 8px;
+        }
+
+        /* 인쇄 설정 */
+        @media print {
+            body {
+                background: none;
+                padding: 0;
+                margin: 0;
+            }
+            .sheet {
+                box-shadow: none;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 15mm; /* 인쇄 시 여백 조정 */
+            }
+            .no-print {
+                display: none !important;
+            }
+            button { display: none; }
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<button onclick="window.print()" class="no-print fixed top-5 right-5 bg-gray-800 text-white px-6 py-3 font-bold rounded shadow hover:bg-black transition cursor-pointer z-50">
+    🖨️ 계획표 출력하기
+</button>
+
+<div class="sheet">
+    <header class="text-center mb-8 border-b-4 border-double border-black pb-6">
+        <h2 class="text-xl text-gray-600 mb-2 font-serif tracking-widest">AI와 함께 만드는 방학 마스터 플랜</h2>
+        <h1 class="text-4xl font-bold font-serif mb-6 underline decoration-4 underline-offset-8">2025 겨울방학 생활계획표</h1>
+
+        <div class="flex justify-end gap-4 text-lg">
+            <div class="flex items-center gap-2">
+                <span class="font-bold font-serif">학년 반 :</span>
+                <span class="border-b border-black w-32 inline-block"></span>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="font-bold font-serif">성 명 :</span>
+                <span class="font-bold border-b border-black w-24 inline-block text-center text-xl">최수환</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="mb-8">
+        <div class="section-title">이번 방학 3대 핵심 목표 (Goals)</div>
+        <div class="grid grid-cols-3 gap-0 border-2 border-black">
+            <div class="border-r border-black p-4 flex flex-col items-center text-center">
+                <div class="bg-black text-white px-3 py-1 text-sm font-bold mb-3 rounded-full">MUST DO (성장)</div>
+                <ul class="text-sm space-y-2 w-full text-left list-disc pl-4 font-serif">
+                    <li><strong class="border-b border-black">수학 학습지 풀기</strong></li>
+                    <li>영어단어 총 3000개</li>
+                    <li>학원 빠지지 않기</li>
+                </ul>
+            </div>
+            <div class="border-r border-black p-4 flex flex-col items-center text-center">
+                <div class="bg-gray-200 text-black border border-black px-3 py-1 text-sm font-bold mb-3 rounded-full">WANT DO (힐링)</div>
+                <ul class="text-sm space-y-2 w-full text-left list-disc pl-4 font-serif">
+                    <li>발로란트 하기 🎮</li>
+                    <li>노래방 & 롯데월드</li>
+                    <li>스트레스 풀기</li>
+                </ul>
+            </div>
+            <div class="p-4 flex flex-col items-center text-center">
+                <div class="bg-white text-black border border-black px-3 py-1 text-sm font-bold mb-3 rounded-full">HABIT (습관)</div>
+                <ul class="text-sm space-y-2 w-full text-left list-disc pl-4 font-serif">
+                    <li>운동 30분씩 하기</li>
+                    <li>영단어 100개/일</li>
+                    <li>게임은 적당히!</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="flex-1">
+        <div class="section-title">나의 하루 일과표 (Daily Routine)</div>
+
+        <table class="hwp-table text-center">
+            <colgroup>
+                <col style="width: 15%">
+                <col style="width: 20%">
+                <col style="width: 50%">
+                <col style="width: 15%">
+            </colgroup>
+            <thead>
+            <tr>
+                <th>시 간</th>
+                <th>구 분</th>
+                <th>주요 활동 내용</th>
+                <th>확 인</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="bg-gray-50 font-bold">08:00</td>
+                <td>🌞 기상</td>
+                <td class="text-left pl-4">이불 개기, 물 한잔 마시기, 아침 식사</td>
+                <td><div class="w-4 h-4 border border-black mx-auto"></div></td>
+            </tr>
+            <tr>
+                <td class="bg-gray-50 font-bold">09:00 ~ 12:00</td>
+                <td class="font-bold text-blue-900">오전 집중</td>
+                <td class="text-left pl-4">
+                    <span class="font-bold">[영어]</span> 단어 암기 (하루 100개 목표)<br>
+                    <span class="text-xs text-gray-500">- 집중력 가장 좋을 때!</span>
+                </td>
+                <td><div class="w-4 h-4 border border-black mx-auto"></div></td>
+            </tr>
+            <tr>
+                <td class="bg-gray-50 font-bold">12:00 ~ 13:00</td>
+                <td>🍱 점심</td>
+                <td class="text-left pl-4">맛있는 점심 식사 & 잠시 휴식</td>
+                <td><div class="w-4 h-4 border border-black mx-auto"></div></td>
+            </tr>
+            <tr>
+                <td class="bg-gray-50 font-bold">13:00 ~ 17:00</td>
+                <td class="font-bold text-red-900">오후 열공</td>
+                <td class="text-left pl-4">
+                    <span class="font-bold">[수학]</span> 학습지 풀기 & 학원 수강<br>
+                    <span class="text-xs text-gray-500">- 미루지 말고 오늘 분량 끝내기</span>
+                </td>
+                <td><div class="w-4 h-4 border border-black mx-auto"></div></td>
+            </tr>
+            <tr>
+                <td class="bg-gray-50 font-bold">17:00 ~ 18:00</td>
+                <td class="font-bold">💪 습관</td>
+                <td class="text-left pl-4">
+                    운동 30분 이상 하기 (체력 관리)<br>
+                    <span class="text-xs text-gray-500">- 땀 흘리고 개운하게 씻기</span>
+                </td>
+                <td><div class="w-4 h-4 border border-black mx-auto"></div></td>
+            </tr>
+            <tr>
+                <td class="bg-gray-50 font-bold">18:00 ~ 19:00</td>
+                <td>🍚 저녁</td>
+                <td class="text-left pl-4">가족과 함께 저녁 식사</td>
+                <td><div class="w-4 h-4 border border-black mx-auto"></div></td>
+            </tr>
+            <tr>
+                <td class="bg-gray-50 font-bold">19:00 ~ 23:00</td>
+                <td class="font-bold text-green-800">🌙 자유</td>
+                <td class="text-left pl-4">
+                    발로란트 🎮 / 유튜브 / 휴식<br>
+                    <span class="text-xs text-gray-500 font-bold">- 단, 내일 공부를 위해 과몰입 금지!</span>
+                </td>
+                <td><div class="w-4 h-4 border border-black mx-auto"></div></td>
+            </tr>
+            <tr>
+                <td class="bg-gray-50 font-bold">23:00 ~</td>
+                <td>💤 취침</td>
+                <td class="text-left pl-4">스마트폰 끄고 꿀잠 자기 (내일 8시 기상!)</td>
+                <td><div class="w-4 h-4 border border-black mx-auto"></div></td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <footer class="mt-8 border-t-2 border-black pt-4">
+        <div class="border border-black p-6 bg-gray-50 text-center">
+            <p class="font-serif text-lg mb-4">
+                위 계획표는 나 자신과의 약속이며, <strong>'갓생'</strong>을 살기 위해<br>
+                성실하게 실천할 것을 다짐합니다.
+            </p>
+            <div class="flex justify-center items-end gap-2 mt-6">
+                <span class="text-sm">2025년 &nbsp; 1월 &nbsp; &nbsp; 일</span>
+                <span class="ml-8 font-serif font-bold text-lg">작성자 : </span>
+                <span class="font-handwriting text-2xl border-b border-black w-32 inline-block"></span>
+                <span class="font-serif font-bold text-lg ml-2">(인)</span>
+            </div>
+        </div>
+        <p class="text-center text-xs text-gray-400 mt-2 font-sans">
+            Designed by AI Planner | School Worksheet Ver.
+        </p>
+    </footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SuHwanIT - Student Profile Card (Big)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* [1. 기본 설정 및 리셋] */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            /* 다크 모드 배경 */
+            background-color: #121212;
+            background-image:
+                    radial-gradient(#ac3bf7 1px, transparent 1px),
+                    radial-gradient(#222 1px, transparent 1px);
+            background-size: 30px 30px; /* 배경 패턴도 약간 키움 */
+            background-position: 0 0, 15px 15px;
+
+            /* 화면 중앙 정렬 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Noto Sans KR', sans-serif;
+            overflow: hidden;
+            perspective: 1200px; /* 원근감 조정 */
+        }
+
+        /* [2. 명함 컨테이너] - 사이즈 대폭 확대 */
+        .card-container {
+            width: 600px;   /* 기존 90mm(약 340px) -> 600px 로 확대 */
+            height: 340px;  /* 기존 50mm -> 340px 로 확대 */
+            position: relative;
+            transform-style: preserve-3d;
+            /* 등장 애니메이션 */
+            animation: floatUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            opacity: 0;
+        }
+
+        /* [3. 명함 본체 디자인] */
+        .card {
+            width: 100%;
+            height: 100%;
+            background: #1a1a1a;
+            border: 3px solid #ac3bf7; /* 테두리 두께 약간 증가 */
+            border-radius: 16px;       /* 라운드 값 증가 */
+
+            /* 네온 글로우 효과 강화 */
+            box-shadow:
+                    0 0 15px rgba(172, 59, 247, 0.3),
+                    0 0 30px rgba(172, 59, 247, 0.2),
+                    inset 0 0 30px rgba(172, 59, 247, 0.1);
+
+            color: #ffffff;
+            padding: 25px; /* 패딩 증가 */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+
+            user-select: none;
+            transform-style: preserve-3d;
+            background-image: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 100%);
+        }
+
+        /* [4. 타이포그래피 및 레이아웃 조정] */
+
+        /* 헤더 영역 */
+        .header {
+            width: 100%;
+            border-bottom: 2px dashed rgba(172, 59, 247, 0.5);
+            padding-bottom: 12px;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .nickname-badge {
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px; /* 폰트 키움 */
+            background: #ac3bf7;
+            color: #000;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 6px;
+            box-shadow: 0 0 8px #ac3bf7;
+        }
+
+        .name {
+            font-size: 32px; /* 이름 폰트 대폭 확대 */
+            font-weight: 900;
+            letter-spacing: -1px;
+            color: #fff;
+            text-shadow: 3px 3px 0px #ac3bf7;
+            line-height: 1.2;
+        }
+
+        /* 메인 정보 영역 */
+        .info-main {
+            font-size: 14px; /* 가독성 좋은 크기로 변경 */
+            color: #ddd;
+            margin-bottom: 10px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            font-weight: 500;
+        }
+
+        .info-main span {
+            background: rgba(255,255,255,0.08);
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        /* 상세 정보 그리드 */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            width: 100%;
+            gap: 8px 20px; /* 간격 조정 */
+            font-size: 13px; /* 상세 정보도 잘 보이게 키움 */
+            text-align: left;
+            margin: 10px 0;
+            padding: 0 20px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .label {
+            color: #ac3bf7;
+            font-weight: 800;
+            margin-right: 8px;
+            min-width: 45px; /* 라벨 정렬을 위해 너비 확보 */
+            text-align: right;
+        }
+
+        .value {
+            color: #f0f0f0;
+            font-weight: 400;
+        }
+
+        /* 하단 영역 */
+        .footer {
+            width: 100%;
+            margin-top: auto;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .keywords {
+            font-size: 14px;
+            font-weight: 700;
+            color: #ac3bf7;
+            margin-bottom: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        .goal {
+            font-size: 11px;
+            color: #999;
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        /* [5. 홀로그램/광택 효과] */
+        .shine {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                    135deg,
+                    rgba(255,255,255,0) 0%,
+                    rgba(255,255,255,0.05) 40%,
+                    rgba(255,255,255,0.2) 50%,
+                    rgba(255,255,255,0.05) 60%,
+                    rgba(255,255,255,0) 100%
+            );
+            pointer-events: none;
+            border-radius: 14px;
+            opacity: 0.6;
+            z-index: 10;
+        }
+
+        /* [6. 애니메이션] */
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100px) rotateX(15deg);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0) rotateX(0);
+                opacity: 1;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="card-container" id="cardContainer">
+    <div class="card" id="card">
+        <div class="shine"></div>
+
+        <div class="header">
+            <div class="nickname-badge">SuHwanIT</div>
+            <div class="name">최수환</div>
+        </div>
+
+        <div class="info-main">
+            <span>인천대학교 3학년</span>
+            <span style="color: #ac3bf7; font-size: 10px;">●</span>
+            <span>CodeHope</span>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-item">
+                <span class="label">MBTI</span>
+                <span class="value">ENTJ</span>
+            </div>
+            <div class="info-item">
+                <span class="label">HOBBY</span>
+                <span class="value">발로란트</span>
+            </div>
+            <div class="info-item">
+                <span class="label">INSTA</span>
+                <span class="value">@soohwan369</span>
+            </div>
+            <div class="info-item">
+                <span class="label">EMAIL</span>
+                <span class="value">ghks36912@naver.com</span>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="keywords">#성실한 #개발자</div>
+            <div class="goal">Future Developer & Educator</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const container = document.getElementById('cardContainer');
+    const card = document.getElementById('card');
+
+    // 마우스 감도 조절 (카드가 커졌으므로 회전 각도도 살짝 부드럽게 조정)
+    container.addEventListener('mousemove', (e) => {
+        const rect = container.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        // 회전 각도
+        const rotateX = ((y - centerY) / centerY) * -12; // 각도를 살짝 줄여서 너무 과하지 않게
+        const rotateY = ((x - centerX) / centerX) * 12;
+
+        card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+        card.style.transition = 'transform 0.1s ease-out';
+
+        const shine = document.querySelector('.shine');
+        shine.style.background = `linear-gradient(${135 + rotateY * 2}deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.05) 40%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.05) 60%, rgba(255,255,255,0) 100%)`;
+    });
+
+    container.addEventListener('mouseleave', () => {
+        card.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+        card.style.transition = 'transform 0.5s ease-out';
+    });
+</script>
+</body>
+</html>
