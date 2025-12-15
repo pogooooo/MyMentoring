@@ -3,272 +3,274 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile Card - Choi SuHwan</title>
+    <title>김이름의 굉장한 방학 빙고</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap" rel="stylesheet">
+
     <style>
-        /* 1. 폰트 및 기본 설정 */
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;600&display=swap');
-
+        /* [기본 설정] */
         :root {
-            /* 메인 컬러: 요청하신 #3b82f6 */
-            --primary: #3b82f6;
-            --primary-dim: rgba(59, 130, 246, 0.3);
-            --primary-glow: rgba(59, 130, 246, 0.6);
-            --bg-color: #050505;
-            --card-bg: #0a0a0f;
-            --text-main: #ffffff;
-            --text-sub: #a0a0a0;
+            --bg-color: #fff9f0; /* 따뜻한 미색 배경 */
+            --border-color: #1a1a1a;
+            --border-width: 3px;
+            --pop-pink: #ff80bf;
+            --pop-blue: #60c5fa;
+            --pop-yellow: #ffeb3b;
+            --pop-purple: #a78bfa;
+            --shadow-offset: 5px;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        body { margin: 0; padding: 0; background-color: #e5e5e5; font-family: 'Jua', sans-serif; }
 
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+        /* [A4 규격 설정] */
+        .sheet {
+            width: 210mm;
+            height: 297mm;
             background-color: var(--bg-color);
-            background-image:
-                    linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
-            background-size: 30px 30px; /* 사이버펑크 그리드 배경 */
-            font-family: 'Rajdhani', sans-serif;
-            overflow: hidden;
-        }
-
-        /* 2. 카드 컨테이너 (90 * 50 비율 유지) */
-        .card-container {
-            /* 실제 명함 사이즈는 90mm x 50mm 이지만,
-               웹 화면에서의 가독성을 위해 비율(1.8:1)을 유지하되
-               픽셀 단위로 6배수(540px * 300px)로 설정했습니다.
-            */
-            width: 540px;
-            height: 300px;
+            background-image: radial-gradient(#ddd 1px, transparent 1px); /* 도트 패턴 */
+            background-size: 20px 20px;
+            margin: 20px auto;
+            padding: 15mm;
             position: relative;
-            perspective: 1000px;
-        }
-
-        /* 반응형: 모바일에서는 너비에 맞춤 */
-        @media (max-width: 600px) {
-            .card-container {
-                width: 90vw;
-                height: 50vw; /* 90:50 비율 유지 */
-            }
-        }
-
-        /* 3. 카드 본체 디자인 */
-        .card {
-            width: 100%;
-            height: 100%;
-            background: var(--card-bg);
-            border: 2px solid var(--primary);
-            border-radius: 10px; /* 약간의 둥근 모서리 */
-            position: relative;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            padding: 30px;
-            box-shadow:
-                    0 0 15px var(--primary-dim),
-                    inset 0 0 20px var(--primary-dim);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            overflow: hidden;
+            border: 1px solid #ccc;
         }
 
-        /* 호버 효과: 살짝 떠오르며 발광 강화 */
-        .card-container:hover .card {
-            transform: translateY(-5px);
-            box-shadow:
-                    0 0 30px var(--primary-glow),
-                    inset 0 0 30px var(--primary-dim);
-            border-color: #60a5fa; /* 호버 시 더 밝은 블루 */
+        /* [Header] */
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
         }
 
-        /* 장식 요소: 코너 포인트 */
-        .card::before, .card::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
-        }
-
-        .card::before {
-            top: -2px; left: -2px;
-            border-top-color: #fff;
-            border-left-color: #fff;
-        }
-
-        .card::after {
-            bottom: -2px; right: -2px;
-            border-bottom-color: #fff;
-            border-right-color: #fff;
-        }
-
-        /* 4. 내부 콘텐츠 배치 */
-        .header {
-            border-bottom: 1px solid var(--primary-dim);
-            padding-bottom: 15px;
-            margin-bottom: 10px;
-        }
-
-        .role-badge {
+        /* 이름 태그 (테이프 느낌) */
+        .name-tag {
             display: inline-block;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.8rem;
-            background: var(--primary-dim);
-            color: var(--primary);
-            padding: 4px 8px;
-            border-radius: 4px;
-            letter-spacing: 2px;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-            box-shadow: 0 0 5px var(--primary-dim);
+            background: var(--pop-blue);
+            color: var(--border-color);
+            padding: 8px 25px;
+            font-family: 'Do Hyeon', sans-serif;
+            font-size: 20px;
+            transform: rotate(-3deg);
+            border: var(--border-width) solid var(--border-color);
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+            margin-bottom: 15px;
         }
 
-        .name-group h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.2rem;
-            color: var(--text-main);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-shadow: 0 0 10px var(--primary-dim);
-            margin: 5px 0 0 0;
+        h1 {
+            font-family: 'Do Hyeon', sans-serif;
+            font-size: 48px;
+            margin: 0;
+            color: var(--border-color);
+            text-shadow: 3px 3px 0px var(--pop-pink);
+            letter-spacing: -1px;
+            line-height: 1.2;
+        }
+        .subtitle {
+            font-size: 18px;
+            color: #555;
+            margin-top: 10px;
+            font-weight: normal;
         }
 
-        .name-group .eng-name {
-            font-size: 1rem;
-            color: var(--text-sub);
-            font-weight: 400;
-            margin-left: 10px;
-            letter-spacing: 0px;
-        }
-
-        .content-body {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
+        /* [Bingo Grid] */
+        .bingo-container {
             flex-grow: 1;
+            display: flex;
+            align-items: center;
             justify-content: center;
         }
 
-        .info-row {
+        .bingo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr); /* 정사각형 유지 */
+            gap: 15px;
+            width: 100%;
+            aspect-ratio: 1 / 1; /* 전체를 정사각형으로 */
+        }
+
+        .cell {
+            background: white;
+            border: var(--border-width) solid var(--border-color);
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 10px;
+            font-size: 18px;
+            box-shadow: var(--shadow-offset) var(--shadow-offset) 0px rgba(0,0,0,0.15);
+            transition: all 0.2s;
+            position: relative;
+            word-break: keep-all;
+        }
+
+        /* 체크박스 스타일 (빈 원) */
+        .check-circle {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #ccc;
+            border-radius: 50%;
+            margin-bottom: 8px;
+        }
+
+        /* [중앙 핵심 목표 강조] */
+        .cell.center-cell {
+            background-color: var(--pop-yellow);
+            border-color: var(--border-color);
+            transform: scale(1.05); /* 살짝 키움 */
+            box-shadow: var(--shadow-offset) var(--shadow-offset) 0px var(--border-color); /* 진한 그림자 */
+            z-index: 10;
+        }
+        .cell.center-cell .goal-text {
+            font-family: 'Do Hyeon', sans-serif;
+            font-size: 22px;
+            color: var(--border-color);
+            font-weight: bold;
+        }
+        .star-icon {
+            font-size: 30px;
+            margin-bottom: 5px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* [Footer] */
+        footer {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .reward-box {
+            background: var(--pop-pink);
+            border: var(--border-width) solid var(--border-color);
+            border-radius: 50px; /* 캡슐 형태 */
+            padding: 15px 30px;
             display: flex;
             align-items: center;
-            font-size: 1.1rem;
-            color: var(--text-main);
+            justify-content: center;
+            gap: 15px;
+            color: white;
+            box-shadow: 4px 4px 0 var(--border-color);
+        }
+        .reward-label {
+            font-family: 'Do Hyeon', sans-serif;
+            font-size: 20px;
+            background: var(--border-color);
+            padding: 2px 10px;
+            border-radius: 10px;
+        }
+        .reward-content {
+            font-size: 22px;
+            color: var(--border-color);
+            font-weight: bold;
         }
 
-        .label {
-            width: 60px;
-            color: var(--primary);
-            font-weight: 700;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.8rem;
+        .promise-area {
+            text-align: right;
+            font-size: 16px;
+            color: #444;
+            padding-right: 10px;
+        }
+        .sign-line {
+            display: inline-block;
+            width: 120px;
+            border-bottom: 2px solid var(--border-color);
+            margin-left: 10px;
         }
 
-        .value {
-            letter-spacing: 0.5px;
-        }
-
-        .value.email {
-            font-family: monospace;
-        }
-
-        /* 5. 키워드 태그 */
-        .footer {
-            display: flex;
-            gap: 10px;
-            margin-top: auto;
-        }
-
-        .tag {
-            font-size: 0.9rem;
-            color: #fff;
-            background: linear-gradient(90deg, var(--primary) 0%, transparent 100%);
-            padding: 5px 10px;
-            border-left: 3px solid #fff;
-        }
-
-        /* 6. 스캔라인 애니메이션 (Cyberpunk 느낌 강조) */
-        .scanline {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.3) 51%);
-            background-size: 100% 4px;
-            pointer-events: none;
-            z-index: 10;
-            opacity: 0.3;
-        }
-
-        .glitch-bar {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: rgba(59, 130, 246, 0.5);
-            z-index: 11;
-            animation: scan 3s linear infinite;
-            box-shadow: 0 0 10px var(--primary);
-            opacity: 0.6;
-        }
-
-        @keyframes scan {
-            0% { top: -10%; opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { top: 110%; opacity: 0; }
-        }
-
-        /* 반응형 폰트 사이즈 조정 */
-        @media (max-width: 600px) {
-            .name-group h1 { font-size: 6vw; }
-            .name-group .eng-name { font-size: 3vw; }
-            .role-badge { font-size: 2.5vw; }
-            .info-row { font-size: 3.5vw; }
-            .tag { font-size: 3vw; padding: 1vw 2vw; }
+        /* [Print Settings] */
+        @media print {
+            body { background: none; }
+            .sheet {
+                margin: 0;
+                width: 100%;
+                height: 100%;
+                border: none;
+                box-shadow: none;
+            }
         }
     </style>
 </head>
 <body>
 
-<div class="card-container">
-    <div class="card">
-        <div class="scanline"></div>
-        <div class="glitch-bar"></div>
+<div class="sheet">
+    <header>
+        <div class="name-tag">Player: 김이름</div>
+        <h1>🎉 굉장한 방학 빙고 🎉</h1>
+        <div class="subtitle">하나씩 정복하고 빙고를 외쳐보세요!</div>
+    </header>
 
-        <div class="header">
-            <span class="role-badge">WEB DEVELOPER</span>
-            <div class="name-group">
-                <h1>최수환<span class="eng-name">Choi SuHwan</span></h1>
+    <section class="bingo-container">
+        <div class="bingo-grid">
+            <div class="cell">
+                <div class="check-circle"></div>
+                <span>핸드폰 없이<br>3시간 보내기 📵</span>
+            </div>
+            <div class="cell">
+                <div class="check-circle"></div>
+                <span>모르는 단어<br>50개 외우기 📚</span>
+            </div>
+            <div class="cell">
+                <div class="check-circle"></div>
+                <span>자전거 타고<br>옆 동네 가기 🚲</span>
+            </div>
+
+            <div class="cell">
+                <div class="check-circle"></div>
+                <span>스쿼트<br>50개 하기 💪</span>
+            </div>
+
+            <div class="cell center-cell">
+                <div class="star-icon">⭐</div>
+                <span class="goal-text">엄청나게<br>멋진 목표</span>
+            </div>
+
+            <div class="cell">
+                <div class="check-circle"></div>
+                <span>일기장<br>한 권 다 쓰기 📝</span>
+            </div>
+
+            <div class="cell">
+                <div class="check-circle"></div>
+                <span>방 대청소<br>하기 🧹</span>
+            </div>
+            <div class="cell">
+                <div class="check-circle"></div>
+                <span>하루 2리터<br>물 마시기 💧</span>
+            </div>
+            <div class="cell">
+                <div class="check-circle"></div>
+                <span>부모님 안마<br>해드리기 💆‍♂️</span>
             </div>
         </div>
+    </section>
 
-        <div class="content-body">
-            <div class="info-row">
-                <span class="label">MBTI</span>
-                <span class="value">ENTJ</span>
-            </div>
-            <div class="info-row">
-                <span class="label">EMAIL</span>
-                <span class="value email">gkhs36912@naver.com</span>
-            </div>
+    <footer>
+        <div class="reward-box">
+            <span class="reward-label">MISSION COMPLETE</span>
+            <span class="reward-content">🎁 침대와 한몸되기 🛌</span>
         </div>
 
-        <div class="footer">
-            <span class="tag">#성실함</span>
-            <span class="tag">#개발자</span>
-            <span class="tag">#팀장</span>
+        <div class="promise-area">
+            위 미션을 모두 완료하면 보상을 획득합니다.
+            <br><br>
+            <strong>날짜 :</strong> 202___ . ___ . ___ &nbsp;&nbsp;
+            <strong>서명 :</strong> <div class="sign-line"></div>
         </div>
-    </div>
+    </footer>
 </div>
 
 </body>
