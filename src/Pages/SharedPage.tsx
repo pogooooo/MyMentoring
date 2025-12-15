@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { collection, addDoc, getDocs, query, orderBy, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
-import { Upload, FileCode, Eye, X, MonitorPlay, Filter, Check } from "lucide-react";
+import { Upload, FileCode, Eye, X, MonitorPlay, Filter, Check, Download } from "lucide-react";
 
 // 재사용을 위한 필터 카테고리 정의
 const CATEGORIES = [
@@ -79,6 +79,27 @@ const SharedPage = () => {
             console.error("Error adding document: ", e);
             alert("업로드 중 오류가 발생했습니다.");
         }
+    };
+
+    const handleDownload = () => {
+        if (!selectedHtml) return;
+
+        // 1. HTML 내용을 담은 Blob 객체 생성
+        const blob = new Blob([selectedHtml], { type: 'text/html' });
+
+        // 2. 가상의 다운로드 링크 생성
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+
+        // 3. 파일명 설정 (필요에 따라 동적으로 변경 가능)
+        a.download = 'student-project.html';
+
+        // 4. 링크 클릭 및 정리
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
     };
 
     return (
@@ -249,12 +270,23 @@ const SharedPage = () => {
                             <span className="font-black flex items-center gap-2 text-lg">
                                 <MonitorPlay size={20}/> PROJECT VIEWER
                             </span>
-                            <button
-                                onClick={() => setSelectedHtml(null)}
-                                className="bg-red-500 text-white p-2 border-2 border-black hover:bg-red-600 transition-colors shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px]"
-                            >
-                                <X size={20} strokeWidth={3} />
-                            </button>
+                            <div className="flex items-center gap-2">
+                                {/* 다운로드 버튼 추가됨 */}
+                                <button
+                                    onClick={handleDownload}
+                                    className="bg-blue-500 text-white p-2 border-2 border-black hover:bg-blue-600 transition-colors shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px]"
+                                    title="Download Source"
+                                >
+                                    <Download size={20} strokeWidth={3}/>
+                                </button>
+
+                                <button
+                                    onClick={() => setSelectedHtml(null)}
+                                    className="bg-red-500 text-white p-2 border-2 border-black hover:bg-red-600 transition-colors shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px]"
+                                >
+                                    <X size={20} strokeWidth={3}/>
+                                </button>
+                            </div>
                         </div>
                         {/* iframe */}
                         <div className="flex-1 bg-gray-800 relative w-full h-full">
